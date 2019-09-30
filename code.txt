@@ -1,0 +1,184 @@
+/* package whatever; // don't place package name! */
+
+import java.util.Scanner;
+import java.lang.*;
+import java.io.*;
+class Movie{
+	int TimeRemaining;
+	long Year,Price;
+	String Genre,Title;
+	float Rating;
+	Movie(){}
+	Movie(String Gen, String Titl, float ratin, long yearr, long pric  )
+	{
+		this.Genre=Gen;
+		this.Title=Titl;
+		this.Rating=ratin;
+		this.Year=yearr;
+		this.Price=pric;
+	}
+	void GetMovie(){}
+	void SearchMovie(){}
+	void DisplayMovie(){}
+	void ExtendRent(){}
+	void AddMovie(){}
+	
+}
+abstract class User{
+	
+	void createAccount(){}
+	void login(){}
+	void logout(){}
+	
+}
+class MovieRentalCompany{
+	List database = new List();
+	void helpUser(){}
+	void deleteAccount(){}
+	void AddMovie1(){}
+	void acceptReturn(){}
+	void removeMovie(){}
+}
+class CART{
+    List tobuy = new List();
+    Scanner in=new Scanner(System.in);
+	void cancel(){}
+	void price(){}
+	void totalPrice(){ long sum=0;
+	    for(int i=0;i<tobuy.ind;i++)
+	    {
+	        sum+=tobuy.list[i].Price;
+	    }
+	        System.out.println("Total cost is "+sum);
+	        System.out.println("Proceed to pay(y/n)??");
+	        char decision=in.next().charAt(0);
+	        if(decision=='y')
+	        {
+	            
+	            proceedtopay();
+	        }
+	    
+	}
+	void proceedtopay(){
+	    System.out.println("Movie(s) bought successfully");
+	}
+	
+}
+class List{
+	Movie[] list = new Movie[50];
+    int ind;
+	List()
+	{
+		ind = 0;
+		for(int i=0;i<50;i++)
+		list[i]=new Movie();
+	}
+	void addTOList(Movie x){list[ind]=x; ind++; System.out.print(x.Title); System.out.print(" Movie is addded");}
+	void removeFromList(){}
+}
+class Customer extends User{
+	int age;
+	String email,name,PreferredGenre;
+	Scanner in=new Scanner(System.in);
+	List Playlist,PreviousRentals;
+	long contact_no; 
+	CART c = new CART();
+	Customer(int ag, String emai, String nam,long contact)
+	{
+     age=ag;
+     email=emai;
+     name=nam;
+     contact_no=contact;
+     
+	}
+	void rentMovie(){}
+	void returnMovie(){}
+	void rateMovie(Movie x){
+		System.out.println("Whats your rating?");
+		x.Rating=in.nextFloat();
+		
+	}
+	
+}
+class PLAYER{
+	
+	void playMovie(){	System.out.println("Now Playing");}
+	void StopMovie(){	System.out.println("Stopped");}
+	void ForwardMovie(){System.out.println("Forward by 10 sec");}
+	void RewindMovie(){System.out.println("Rewind by 5 sec");}
+}
+/* Name of the class has to be "Main" only if the class is public. */
+class Main
+{
+	public static void main(String[] args) throws java.lang.Exception
+	{
+		
+		Movie SyeRaa= new Movie("Adventure","SyeRaa",9,2019,200);
+		Movie War= new Movie("Action","War",7,2019,120);
+		Movie HF4= new Movie("Comedy","HF4",6,2019,40);
+		Movie EndGame= new Movie("SuperHero","EndGame",10,2019,250);
+		Movie Robo= new Movie("ScI-fI","Robo",8,2010,170);
+		Movie KGF= new Movie("Action","KGF",9,2018,180);
+		MovieRentalCompany Palli = new MovieRentalCompany();
+		Palli.database.addTOList(SyeRaa); System.out.println(" to database");
+		Palli.database.addTOList(War); System.out.println(" to database");
+		Palli.database.addTOList(HF4); System.out.println(" to database");
+		Palli.database.addTOList(EndGame); System.out.println(" to database");
+		Palli.database.addTOList(Robo); System.out.println(" to database");
+		Palli.database.addTOList(KGF); System.out.println(" to database");
+		System.out.println("Log in to your account");
+		Scanner in =new Scanner(System.in);
+		System.out.print("userId:");
+		int userId=in.nextInt();
+		System.out.print("pin:");
+		int pin=in.nextInt();
+		Customer cus1= new Customer(17,"stuc@gmail.com","Shiva",224347);
+		System.out.println("Logged in successfully!");
+		System.out.println("Hello "+cus1.name+ " !!");
+		 int fun;
+		do
+		{
+		   	System.out.println("1.Search");
+		    System.out.println("2.ViewCart");
+		    System.out.println("3.Log out");
+		    System.out.print("Enter task:");
+		   
+		    fun = in.nextInt();
+		    if(fun==1)
+		    {
+		        	String mov;
+		        	System.out.println("Enter the movie to be searched");
+		        	mov=in.next();
+		        	//System.out.println(mov);
+		        	//System.out.println(Palli.database.ind);
+		        	for(int j=0;j<Palli.database.ind;j++)
+		        	{
+		        	    if(mov.equals(Palli.database.list[j].Title))
+		        	    {
+		        	        System.out.println("Result Found!");
+		        	        System.out.println("Want to add it to cart(y/n)? ");
+		        	         char decision=in.next().charAt(0);
+	                          if(decision=='y')
+	                          {
+	            
+	                          cus1.c.tobuy.addTOList(Palli.database.list[j]); System.out.println(" to cart");
+	                          }
+	                         
+		        	    }
+		        	}
+		    }
+		    if(fun==2)
+		    {
+		        System.out.println("Cart contains:");
+		        for(int i=0; i<cus1.c.tobuy.ind; i++)
+		        {
+		            System.out.println(cus1.c.tobuy.list[i].Title);
+		        }
+		        cus1.c.totalPrice();
+		    }
+		}while(fun!=3);
+		
+	
+		
+	}
+}
